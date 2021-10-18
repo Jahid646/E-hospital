@@ -1,0 +1,61 @@
+[
+    {
+        "key": 1,
+        "name": "24/7 Service",
+        "price": 23.99,
+        "description": "Day in and day out Nursing and Medial Services gives custom-made care to individuals in their cabin who are attempting to oversee all alone.",
+        "img": "https://i.ibb.co/CMKCcsb/service24.jpg"
+    },
+    {
+        
+        "key": 2,
+        "name": "Cancer Clinic",
+        "price": 21.99,
+        "description": "We trust that growth influences each individual in an unexpected way, and that each individual can profit by an interesting, individualized care arrange.",
+        "img": "https://i.ibb.co/59SGB62/cancer.jpg"
+    },
+    {
+        "key": 3,
+        "name": "Blood Test",
+        "price": 12.99,
+        "description": "Most blood tests just take a couple of minutes to finish and are done at your nearby healing facility by a specialist, medical attendant, thanks.",
+        "img": "https://i.ibb.co/k2tn6zt/bloodtest.jpg"
+    },
+    {
+        "key": 4,
+        "name": "Medical counselling",
+        "price":25.99,
+        "description": "Our Medical Social Workers take care of patients and families who encounter challenges in adapting to mental, social and emerging from ailment.",
+        "img": "https://i.ibb.co/Qvmhx1V/medi-Counsil.jpg"
+    },
+    {
+        "key": 5,
+        "name": "Rehabilitation",
+        "price": 35.99,
+        "description": "our Rehabilitation Services gives exhaustive therapeutic and professional recovery to deliver a representative's obstructions to employ ability.",
+      
+        "img": "https://i.ibb.co/brwSGZj/rehabilitation.jpg"
+    },
+    {"key": 6,
+        "name": "Qualified Doctors",
+        "price": 50.99,
+        "description": "Subsequent to giving conclusions, a specialist treats patients who are experiencing sicknesses and wounds. A specialist is likewise called a doctor.",
+        
+        "img": "https://i.ibb.co/3vdbpZP/Qdr.jpg"
+    }, {
+        "key": 7,
+        "name": "Heart Institute",
+        "price": 30.99,
+        "description": "This charge $195 incorporates member materials, and additionally a nibble and supper on Monday and breakfast and lunch on Tuesday.",
+        "img": "https://i.ibb.co/WGW9FZm/Heart.jpg"
+    },
+    {
+        
+        "key": 8,
+        "name": "Medicine Facilities",
+        "price": 19.99,
+        "description": "Well being offices are spots that give medicinal services. They incorporate healing facilities, for example, birthing focuses and psychiatric care focuses.",
+        "img": "https://i.ibb.co/RcNdnnY/medicine.jpg"
+    }
+    
+]

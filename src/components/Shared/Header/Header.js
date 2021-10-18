@@ -2,44 +2,62 @@ import React from 'react';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import logo from '../../../images/logo.png'
+import icon from '../../../images/icon.png'
 const Header = () => {
   return (
-    <div>
-      
-      <h1 className="text-center m-5"> <span className="text-info">E-health</span>  Hospital</h1>
-            
-      <Navbar className="p-3" bg="info" variant="light">
-         
-          <Navbar.Brand href="/">
-            <img
-              src={logo}
-              height="100"
-              className="d-inline-block align-top"
-              alt="React Bootstrap logo"
-            />
-          </Navbar.Brand>
-          <Nav className="ms-auto fw-bold justify-content-end">
-          <Nav.Link as={NavLink} to="/specialist" className="">
-              Our Specialist
-            </Nav.Link>
-          <Nav.Link as={NavLink} to="/about" className="">
-              About Us
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/login" className="">
-              Login
-            </Nav.Link>
-            <Nav.Link
-              as={NavLink}
-              to="/signup"
-              className="bg-secondary rounded text-info px-4"
-            >
-              Sign up
-            </Nav.Link>
-          </Nav>
+    <>
+    <nav className="navbar navbar-expand-lg bg-info fontWeight">
+       <div className="container">
+  
         
-      </Navbar>
-    </div>
-  );
+          <NavLink className="navbar-brand" to="/">
+          <img
+            src={logo}
+            height="60"
+            className="d-inline-block align-top"
+            alt="E-health Hospital Logo"
+          />
+          </NavLink>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"  aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto text-center fw-bold">
+              <li className="nav-item">
+                <NavLink className="nav-link" aria-current="page" exact to="/">Home</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/specialists">Our Specialists</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/about">About Us</NavLink>
+              </li>         
+                <li className="nav-item">
+                <NavLink className="nav-link" to="/login"> Login</NavLink>
+              </li>   
+              <li className="nav-item">
+                <NavLink className="nav-link bg-dark rounded-pill text-white" to="/signup"> Signup</NavLink>
+              </li>   
+              
+              
+             
+            </ul>
+
+             
+          </div>
+         
+        </div>
+   </nav>
+ 
+ <div className="container p-5 d-flex justify-content-center">
+ <img src={icon} height="50" alt="" />
+  <h1>E-health <span className="text-info">Hospital</span> </h1>
+</div>
+ <hr/>
+</>
+
+);
 };
 
 export default Header;
+   
