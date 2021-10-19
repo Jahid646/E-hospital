@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+
 import { NavLink } from 'react-router-dom';
 import logo from '../../../images/logo.png'
 import icon from '../../../images/icon.png'
 const Header = () => {
   return (
     <>
-    <nav className="navbar navbar-expand-lg bg-info fontWeight">
+    <nav className="navbar navbar-expand-lg bg-info navbar-light fontWeight">
        <div className="container">
   
         

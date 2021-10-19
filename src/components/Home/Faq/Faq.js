@@ -7,12 +7,12 @@ const Faq = () => {
         <Container className="border mt-5 pt-5 pb-5 mb-5">
             <Row>
 
-            <Col className="text-center mt-5 pt-5">
+            <Col className="text-center mt-5 pt-5 " md={6} sm={12} xs={12}>
                 <div>
-                    <img className="" height="500" src="https://i.ibb.co/t2jM1mb/about1.png" alt="" />
+                    <img className="img-fluid" height="450" src="https://i.ibb.co/t2jM1mb/about1.png" alt="" />
                 </div>
                 </Col>
-                <Col className=" mt-5 pt-5">
+                <Col className=" mt-5 pt-5"  md={6} sm={12} xs={12}>
                        <div>
             <div className="text-center mt-5 pt-5">
                 <h2>Frequently Asked <span className="text-info">Questions</span> </h2>
