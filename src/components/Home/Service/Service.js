@@ -11,11 +11,11 @@ const Service = (props) => {
         <Card.Body className="text-center">
           <Card.Title>{name}</Card.Title>
           <Card.Text style={{ textAlign: "justify" }}>{description}</Card.Text>
-          <h3 className="text-dark fw-bold">$ {price}</h3>
+          <h5 className="text-dark fw-bold">$ {price}</h5>
         </Card.Body>
         <div className="mx-auto pb-2">
-          <Link to={`/services/${key}`}>
-            <Button variant="outline-info">Get Service</Button>
+          <Link to={`/service/${key}`}>
+            <Button variant="outline-info">Service Details</Button>
           </Link>
         </div>
       </Card>
