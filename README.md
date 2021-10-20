@@ -12,3 +12,6 @@
 5. After login user can see service details.
 
 
+* There is a problem in firebase deploy, thats why I deployed in netlify.
+* Problem example is: https://ibb.co/7Xc84bM
+
