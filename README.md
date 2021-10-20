@@ -13,5 +13,5 @@
 
 
 * There is a problem in firebase deploy, thats why I deployed in netlify.
-* Problem example is: https://ibb.co/7Xc84bM
+* Problem example is: https://i.ibb.co/SPTWrJY/Screenshot-from-2021-10-20-20-50-24.png
 
