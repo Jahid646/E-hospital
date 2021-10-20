@@ -10,14 +10,13 @@ import Signup from "./components/Shared/Authentication/Signup/Signup";
 import Specialists from "./components/Shared/Specialists/Specialists";
 import About from "./components/Shared/About/About";
 import ServiceDetails from "./components/Shared/ServiceDetails/ServiceDetails";
-import { createContext, useState } from "react";
 import PrivateRoute from "./Privateroute/PrivateRoute";
+import AuthProvider from "./context/AuthProvider";
 
-export const UserContext = createContext();
+
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+    <AuthProvider>
       <Router>
         <Header></Header>
         <Switch>
@@ -51,7 +50,7 @@ function App() {
         </Switch>
       </Router>
       <Footer></Footer>
-    </UserContext.Provider>
+      </AuthProvider>
   );
 }
 

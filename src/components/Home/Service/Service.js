@@ -5,7 +5,7 @@ import './Service.css'
 const Service = (props) => {
   const { key, name, price, description, img } = props.service;
   return (
-    <Col xl={3} lg={4} md={5} sm={6}>
+    <Col xl={3} lg={4} md={6} sm={12}>
       <Card id="cardStyle" style={{ width: "18rem" }} className="h-100 mx-auto border-info border">
         <Card.Img variant="top" src={img} />
         <Card.Body className="text-center">

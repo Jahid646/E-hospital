@@ -1,87 +1,58 @@
-import React, { useContext, useState } from "react";
+
 import { Card, Col, Container, Row, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useHistory, useLocation, NavLink } from "react-router-dom";
 import logo from "../../../../images/Screenshot_from_2021-10-18_13-05-24-removebg-preview.png";
-import initializationAuth from "../Firebase/firebase.init";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import { UserContext } from "../../../../App";
-import { addToDb, getUserInfo } from "../../../../fakeDB";
 
-initializationAuth();
+
+
+import useAuth from '../../../../hooks/useAuth';
 
 const Login = () => {
-  const { register, handleSubmit, reset } = useForm();
-  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const { register, handleSubmit} = useForm();
 
   const history = useHistory();
   const location = useLocation();
 
-  let { from } = location.state || { from: { pathname: "/" } };
+  const  url  = location.state?.from || "/" ;
 
-  const googleProvider = new GoogleAuthProvider();
-  const auth = getAuth();
+  const {
+    loginWithEmailAndPassword,
+    readDatabase,
+    signInUsingGoogle,
+    setUser,
+    setIsLoading,
+  } = useAuth();
+
+  
   const handleSignIn = () => {
-    signInWithPopup(auth, googleProvider)
+    signInUsingGoogle()
       .then((result) => {
-        console.log(result.user);
-        const { displayName, email, uid } = result.user;
-
-        const signedInUser = {
-          name: displayName,
-          email: email,
-          uid: uid,
-        };
-
-        addToDb(uid, displayName);
-
-        setLoggedInUser(signedInUser);
-        console.log(signedInUser);
-
-        history.replace(from);
-
+        const user = result.user;
+        setUser(user);
+        history.push(url);
       })
       .catch((error) => {
-
         const errorMessage = error.message;
-console.log(errorMessage)
-
+        console.log(errorMessage);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
+
+
   const onSubmit = (data) => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
+    console.log(data)
+    loginWithEmailAndPassword(data.email, data.password)
       .then((userCredential) => {
-        // Signed in
-
         const user = userCredential.user;
-        const savedUserInfo = getUserInfo();
-        // console.log("object", savedUserInfo);
-        const userName = savedUserInfo[user.uid];
-        // console.log("after uid", user.email);
-
-        //     console.log("sign in email",savedUserInfo)
-
-            const signedInUser = {
-              name: userName,
-              email: user.email,
-              uid:user.uid
-            };
-            setLoggedInUser(signedInUser);
-            console.log("data set",loggedInUser)
-        //     const u = JSON.stringify(user);
-        //     // localStorage.setItem("user", u);
-            history.replace(from);
-            // window.location.reload();
+        readDatabase(user, user.uid);
+        history.push(url);
       })
       .catch((error) => {
-        alert("Email or Password is Incorrect");
-
+        alert('Enter Valid Email and Password')
         const errorMessage = error.message;
         console.log(errorMessage);
       });

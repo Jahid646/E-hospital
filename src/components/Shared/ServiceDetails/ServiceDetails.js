@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Card, Col, Container, Row, Button, Modal } from 'react-bootstrap';
 import { useParams } from 'react-router';
 
+
+// This is Private route 
 const ServiceDetails = () => {
     const { id } = useParams();
   const [singleService, setSingleService] = useState([]);

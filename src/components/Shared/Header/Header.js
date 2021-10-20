@@ -1,19 +1,14 @@
-import React, { useContext } from "react";
 
-import { NavLink, useHistory } from "react-router-dom";
+
+import { NavLink } from "react-router-dom";
 import logo from "../../../images/logo.png";
 import icon from "../../../images/icon.png";
-import { UserContext } from "../../../App";
+import useAuth from "../../../hooks/useAuth";
+import Button from "@restart/ui/esm/Button";
+
 const Header = () => {
-  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-console.log(loggedInUser)
-  // const user = JSON.parse(localStorage.getItem("user"));
-  // console.log(user);
-  const history = useHistory();
-  const logout = () => {
-    history.push("/");
-    localStorage.removeItem("user");
-  };
+  const { user, logOut } = useAuth();
+  
 
   return (
     <>
@@ -39,57 +34,45 @@ console.log(loggedInUser)
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto text-center fw-bold">
-              <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" exact to="/">
-                  Home
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/specialists">
-                  Our Specialists
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/about">
-                  About Us
-                </NavLink>
-              </li>
+              <NavLink className="nav-link" aria-current="page" exact to="/">
+                Home
+              </NavLink>
 
-              {loggedInUser?.name ? (
-                <div>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/" onClick={logout}>
-                      {" "}
+              <NavLink className="nav-link" to="/specialists">
+                Our Specialists
+              </NavLink>
+
+              <NavLink className="nav-link" to="/about">
+                About Us
+              </NavLink>
+
+              {user.email
+                ? [
+                    <p key={user.email} className="mt-2 mx-3 mb-lg-0 mb-3">
+                      {user.displayName}
+                    </p>,
+                    <Button
+                      key="logoutkey"
+                      onClick={logOut}
+                      className="rounded-pill btn-dark"
+                      variant=""
+                    >
                       Logout
-                    </a>
-                  </li>
-                </div>
-              ) : (
-                <div>
-                  <li className="nav-item">
-                    <NavLink className="nav-link" to="/login">
+                    </Button>,
+                  ]
+                : [
+                    <NavLink className="nav-link" to="/login" key="loginkey">
                       {" "}
                       Login
-                    </NavLink>
-                  </li>
-                </div>
-              )}
-
-              
-              {loggedInUser?.email && (
-                <li className="nav-item">
-                  <h5 className="ml-3 mt-2">{loggedInUser.name}</h5>
-                </li>
-              )}
-
-              <div>
-                <li className="nav-item">
-                  <NavLink className="nav-link mx-2 bg-dark rounded-pill text-white" to="/signup">
-                    {" "}
-                    Signup as New
-                  </NavLink>
-                </li>
-              </div>
+                    </NavLink>,
+                    <NavLink
+                      className="nav-link mx-2 bg-dark rounded-pill text-white"
+                      to="/signup"
+                      key="namekey"
+                    >
+                      Register
+                    </NavLink>,
+                  ]}
             </ul>
           </div>
         </div>

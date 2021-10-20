@@ -1,45 +1,59 @@
-import React, { useContext, useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+
+import { Card, Col, Container, Row,Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import logo from "../../../../images/Screenshot_from_2021-10-18_13-05-24-removebg-preview.png";
 import initializationAuth from "../Firebase/firebase.init";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { addToDb } from "../../../../fakeDB";
-import { UserContext } from "../../../../App";
+
+import useAuth from "../../../../hooks/useAuth";
 
 initializationAuth();
-const auth = getAuth();
+
 
 const Signup = () => {
   const history = useHistory();
+  const location = useLocation();
+  const url = location.state?.from || "/";
   const { register, handleSubmit } = useForm();
-  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
-  const onSubmit = (data) => {
-    createUserWithEmailAndPassword(auth, data.email, data.password)
+  const {
+    registerWithEmailAndPassword,
+    setUser,
+    writeDatabase,
+    setIsLoading,
+    signInUsingGoogle,
+  } = useAuth();
+
+  const onSubmit = (data) =>
+    registerWithEmailAndPassword(data.email, data.password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-        console.log("from singup", data.name);
-        addToDb(user.uid, data.name);
-        const signedInUser = {
-          name: data.name,
-          email: user.email,
-          uid: user.uid,
-        };
-
-        setLoggedInUser(signedInUser);
-
-        history.push("/login");
-
-        console.log(user);
+        user.displayName = data.name;
+        setUser(user);
+        writeDatabase(data.name, data.email, user.uid);
+        history.push(url);
       })
-
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage);
-        // ..
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+  const handleSignInBtnClick = () => {
+    signInUsingGoogle()
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        history.push(url);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   return (
@@ -71,7 +85,13 @@ const Signup = () => {
                   value="Signup"
                 />
               </form>
-
+              <Button
+                onClick={handleSignInBtnClick}
+                variant="outline-success mb-3"
+                style={{ width: "100%" }}
+              >
+                Continue with Google
+              </Button>{" "}
               <br />
               <NavLink className="mx-auto text-danger" to="/login">
                 Already have an account?
