@@ -3,13 +3,12 @@ import { Redirect, Route } from 'react-router';
 import { UserContext } from '../App';
 
 const PrivateRoute = ({children, ...rest}) => {
-    const user = JSON.parse(localStorage.getItem('user'));
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     return (
         <Route
             {...rest}
             render={({ location }) =>
-            loggedInUser.email || localStorage.getItem('user')? (
+            loggedInUser.email || localStorage.getItem('user_info') ? (
                     children
                 ) : (
                     <Redirect

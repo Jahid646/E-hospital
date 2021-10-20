@@ -6,9 +6,9 @@ import icon from "../../../images/icon.png";
 import { UserContext } from "../../../App";
 const Header = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-
-  const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+console.log(loggedInUser)
+  // const user = JSON.parse(localStorage.getItem("user"));
+  // console.log(user);
   const history = useHistory();
   const logout = () => {
     history.push("/");
@@ -55,7 +55,7 @@ const Header = () => {
                 </NavLink>
               </li>
 
-              {user?.email ? (
+              {loggedInUser?.name ? (
                 <div>
                   <li className="nav-item">
                     <a className="nav-link" href="/" onClick={logout}>
@@ -75,19 +75,21 @@ const Header = () => {
                 </div>
               )}
 
+              
+              {loggedInUser?.email && (
+                <li className="nav-item">
+                  <h5 className="ml-3 mt-2">{loggedInUser.name}</h5>
+                </li>
+              )}
+
               <div>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/signup">
+                  <NavLink className="nav-link mx-2 bg-dark rounded-pill text-white" to="/signup">
                     {" "}
-                    Signup
+                    Signup as New
                   </NavLink>
                 </li>
               </div>
-              {user?.email && (
-                <li className="nav-item">
-                  <h5 className="ml-3 mt-2">{user.email}</h5>
-                </li>
-              )}
             </ul>
           </div>
         </div>

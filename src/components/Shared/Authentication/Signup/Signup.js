@@ -1,39 +1,44 @@
-import React from "react";
-import { Card, Col, Container, Row, Button } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { NavLink, useHistory } from "react-router-dom";
 import logo from "../../../../images/Screenshot_from_2021-10-18_13-05-24-removebg-preview.png";
 import initializationAuth from "../Firebase/firebase.init";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signOut,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { addToDb } from "../../../../fakeDB";
+import { UserContext } from "../../../../App";
 
 initializationAuth();
 const auth = getAuth();
 
 const Signup = () => {
   const history = useHistory();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
   const onSubmit = (data) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        console.log("from singup", data.name);
+        addToDb(user.uid, data.name);
+        const signedInUser = {
+          name: data.name,
+          email: user.email,
+          uid: user.uid,
+        };
+
+        setLoggedInUser(signedInUser);
+
         history.push("/login");
-        // ...
+
         console.log(user);
       })
+
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error.message);
+        console.log(errorMessage);
         // ..
       });
   };
@@ -66,9 +71,7 @@ const Signup = () => {
                   value="Signup"
                 />
               </form>
-              <Button variant="outline-success mb-3" style={{ width: "100%" }}>
-                Continue with Google
-              </Button>{" "}
+
               <br />
               <NavLink className="mx-auto text-danger" to="/login">
                 Already have an account?
